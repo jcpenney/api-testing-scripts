@@ -48,6 +48,7 @@ getAddresses = function(callback) {
 
   Request.get(reqOpts, function(err, httpResponse, body) {
     if (err) return callback(err);
+    if (/^4/.test(String(httpResponse.statusCode))) return callback(JSON.parse(body));
     callback(null, JSON.parse(body));
   });
 
@@ -61,13 +62,13 @@ getAddresses = function(callback) {
 deleteAddress = function(addressId, callback) {
 
   reqOpts = {
-    uri: config.BASE_API_URL + "/customer/address/" + addressId
+    uri: config.BASE_API_URL + "/customer/addresses/" + addressId
     , headers: { 'Content-Type': 'application/json' }
   };
 
   Request.del(reqOpts, function(err, httpResponse, body) {
-    console.log("\n" + body.red);
     if (err) return callback(err);
+    if (/^4/.test(String(httpResponse.statusCode))) return callback(JSON.parse(body));
     callback();
   });
 
@@ -82,17 +83,17 @@ Prompt("\nEnter your JCP email: ".cyan, function (email) {
   Prompt.password("Enter your JCP password: ".cyan, function (password) {
     console.log("\nSigning in...".yellow);
     signIn(email, password, function(err, cookie) {
-      if (err) return console.error("Error signing in:".red, JSON.stringify(err).red);
+      if (err) return console.error("\nError signing in:".red, JSON.stringify(err).red + "\n");
       console.log("\nSigned in successfully.".green);
       console.log("\nFetching existing addresses...".yellow);
       getAddresses(function(err, addresses) {
-        if (err) return console.error("Error fetching addresses:".red, JSON.stringify(err).red);
+        if (err) return console.error("\nError fetching addresses:".red, JSON.stringify(err).red + "\n");
         console.log("\nAddresses retrieved successfully:\n".green, addresses);
         if (addresses.length > 0) {
           var addressId = addresses[0].id;
           console.log("\nDeleting address ".green + addressId.green + "...".green);
           deleteAddress(addressId, function(err) {
-            if (err) return console.error("Error deleting address:".red, JSON.stringify(err).red);
+            if (err) return console.error("\nError deleting address:".red, JSON.stringify(err).red + "\n");
             console.log("\nAddress deleted successfully\n".green);
           });
         } else {
