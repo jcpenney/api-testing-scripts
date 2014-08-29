@@ -5,4 +5,4 @@ After installing [Node](http://nodejs.org/) and [NPM](https://github.com/npm/npm
 
 ## Testing Address Deletion Service
 
-Run `node delete-first-address` from the project root. You will be prompted to provide your JCP credentials, then the first existing address will be deleted from the authenticated account.
+Run `node delete-first-address` from the project root. You will be prompted to provide your jcpenney.com credentials, then the first existing address will be deleted from the authenticated account.
