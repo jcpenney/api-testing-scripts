@@ -62,9 +62,12 @@ deleteAddress = function(addressId, callback) {
 
   reqOpts = {
     uri: config.BASE_API_URL + "/customer/address/" + addressId
+    , headers: { 'Content-Type': 'application/json' }
+    , json: {}
   };
 
   Request.del(reqOpts, function(err, httpResponse, body) {
+    console.log("\n" + body.red);
     if (err) return callback(err);
     callback();
   });
@@ -88,15 +91,14 @@ Prompt("\nEnter your JCP email: ".cyan, function (email) {
         console.log("\nAddresses retrieved successfully:\n".green, addresses);
         if (addresses.length > 0) {
           var addressId = addresses[0].id;
-          console.log("\nDeleting address with id: ".green + addressId.green);
+          console.log("\nDeleting address ".green + addressId.green + "...".green);
           deleteAddress(addressId, function(err) {
             if (err) return console.error("Error deleting address:".red, JSON.stringify(err).red);
-            console.log("\nAddress deleted successfully".green);
+            console.log("\nAddress deleted successfully\n".green);
           });
         } else {
-          console.log("\nNo addresses to delete".green);
+          console.log("\nNo addresses to delete\n".green);
         }
-        console.log("\nThanks for playing!\n".rainbow)
       });
     });
   });
