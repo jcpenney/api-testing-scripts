@@ -63,7 +63,6 @@ deleteAddress = function(addressId, callback) {
   reqOpts = {
     uri: config.BASE_API_URL + "/customer/address/" + addressId
     , headers: { 'Content-Type': 'application/json' }
-    , json: {}
   };
 
   Request.del(reqOpts, function(err, httpResponse, body) {
