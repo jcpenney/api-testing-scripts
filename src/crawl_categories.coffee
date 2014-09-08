@@ -14,6 +14,7 @@ Request = require 'request'
 config =
   API_BASE_URL: "https://api.jcpenney.com/v2"
 
+totalCategoriesFetched = 0
 lameCategories = []
 
 
@@ -24,6 +25,8 @@ lameCategories = []
 getAllDepartmentsWithCategories = (callback, maxLevel=99999) ->
 
   fetchCategory = (category, currentLevel, callback) ->
+
+      totalCategoriesFetched++
 
       # If the max level has been exceeded, we're done here
       return callback() if currentLevel > maxLevel
@@ -38,7 +41,7 @@ getAllDepartmentsWithCategories = (callback, maxLevel=99999) ->
         jsonCategory = JSON.parse(body)
 
         # Determine whether category is valid, based on its url property
-        o = "#{ Array(currentLevel + 1).join('...') }#{ category.name } (#{ category.id }) ".white
+        o = "#{ totalCategoriesFetched }: #{ Array(currentLevel + 1).join('...') }#{ category.name } (#{ category.id }) ".white
         if _.isEmpty category.url
           lameCategories.push category
           console.log o + "does not have a valid URL: #{ category.url }".red
