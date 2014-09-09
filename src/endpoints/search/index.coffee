@@ -1,5 +1,3 @@
-Colors = require 'colors'
-QS = require 'qs'
 Reporter = require "#{ __dirname }/../../lib/reporter"
 Request = require 'request'
 

@@ -1,4 +1,3 @@
-Colors = require 'colors'
 Reporter = require "#{ __dirname }/../../lib/reporter"
 Request = require 'request'
 
