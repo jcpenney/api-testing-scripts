@@ -11,8 +11,8 @@ module.exports = (baseURL, options, callback) ->
     reqOpts =
       jar: cookieJar
       json:
-        firstName: "Jay-C (#{ (new Date()).getTime() })"
-        lastName: "Penney (#{ (new Date()).getTime() })"
+        firstName: "Jay-C"
+        lastName: "Penney"
       method: 'PUT'
       uri: "#{ baseURL }/customer/name"
 

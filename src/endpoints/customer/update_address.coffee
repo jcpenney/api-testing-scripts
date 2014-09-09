@@ -12,8 +12,8 @@ module.exports = (baseURL, options, callback) ->
     reqOpts =
       jar: cookieJar
       json:
-        firstName: 'Jay-C'
-        lastName: 'Penney'
+        firstName: "Jay-C"
+        lastName: "Penney"
         addressLineOne: '200 Lafayette Street'
         addressLineTwo: null
         city: 'New York'
