@@ -16,9 +16,17 @@ helper.describeResponse = (err, httpResponse, body) ->
     console.error "\nRequest error.".red
     console.error "\n#{ FormatJSON.plain(err) }\n".red
   else if /^4|^5/.test String(httpResponse.statusCode)
+    try
+      body = FormatJSON.plain JSON.parse(body)
+    catch e
+      #
     console.error "\nStatus Code: #{ httpResponse.statusCode }".red
-    console.log "\n#{ if body then body.red else 'No body.'.red }\n"
+    console.error "\n#{ if body then body.red else 'No body.'.red }\n"
   else
+    try
+      body = FormatJSON.plain JSON.parse(body)
+    catch e
+      #
     console.log "\nStatus Code: #{ httpResponse.statusCode }".green
     console.log "\n#{ if body then body.green else 'No body.'.green }\n"
 
