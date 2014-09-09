@@ -1,14 +1,14 @@
-Reporter = require "#{ __dirname }/../../lib/reporter"
+_ = require 'lodash'
+EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports =
+module.exports = (baseURL, options, callback) ->
 
-  test: (baseURL) ->
+  productId = 'pp5004200088'
+  reqOpts =
+    headers: { 'Content-Type': 'application/json' }
+    uri: "#{ baseURL }/products/#{ productId }/prices"
 
-    productId = 'pp5004200088'
-    reqOpts =
-      uri: "#{ baseURL }/products/#{ productId }/prices"
+  EndpointHelper.describeRequest "Fetching product #{ productId } prices...", reqOpts
 
-    Reporter.describeRequest "Fetching product #{ productId } prices", reqOpts
-
-    Request reqOpts, Reporter.describeResponse
+  Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

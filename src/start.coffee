@@ -88,7 +88,8 @@ promptForEnvironment (err, environment) ->
     promptForResourceAction resource, (err, action) ->
       return console.error err.message.red if err
       endpoint = require "#{ __dirname }/endpoints/#{ resource }/#{ action }"
-      endpoint.test environment.baseURL
+      endpoint environment.baseURL, { credentials: Config.credentials }, ->
+        process.exit()
 
 
 
