@@ -1,4 +1,5 @@
 _ = require 'lodash'
+FormatJSON = require 'format-json'
 Request = require 'request'
 
 helper = {}
@@ -6,14 +7,14 @@ helper = {}
 helper.describeRequest = (message, requestOptions) ->
   requestOptions = _.cloneDeep requestOptions
   if requestOptions.jar
-    requestOptions.jar = '{ jar data surpressed for the sake of brevity }'
+    requestOptions.jar = 'cookie jar data surpressed for the sake of brevity'
   console.log "\n#{ message }".cyan if message
-  console.log "#{ JSON.stringify(requestOptions) }".yellow
+  console.log "#{ FormatJSON.plain(requestOptions) }".yellow
 
 helper.describeResponse = (err, httpResponse, body) ->
   if err
     console.error "\nRequest error.".red
-    console.error "\n#{ JSON.stringify(err) }\n".red
+    console.error "\n#{ FormatJSON.plain(err) }\n".red
   else if /^4|^5/.test String(httpResponse.statusCode)
     console.error "\nStatus Code: #{ httpResponse.statusCode }".red
     console.log "\n#{ if body then body.red else 'No body.'.red }\n"
