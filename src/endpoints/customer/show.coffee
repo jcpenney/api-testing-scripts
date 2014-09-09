@@ -1,19 +1,17 @@
 _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
-Request = require('request').defaults { jar: true }
-ToughCookie = require 'tough-cookie'
+Request = require 'request'
 
 module.exports = (baseURL, options, callback) ->
 
-  EndpointHelper.getCookie baseURL, options, (err, cookie) ->
+  EndpointHelper.getCookieJar baseURL, options, (err, cookieJar) ->
 
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
-    Request.cookie cookie
-
     reqOpts =
       headers: { 'Content-Type': 'application/json' }
-      uri: "#{ baseURL }/customer/addresses"
+      jar: cookieJar
+      uri: "#{ baseURL }/customer"
 
     EndpointHelper.describeRequest "Fetching customer", reqOpts
 

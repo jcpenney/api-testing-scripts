@@ -1,3 +1,6 @@
+Request = require 'request'
+
+
 helper = {}
 
 helper.describeRequest = (message, requestOptions) ->
@@ -19,12 +22,15 @@ helper.handleResponse = (err, httpResponse, body, callback) ->
   helper.describeResponse err, httpResponse, body
   callback err, httpResponse, body if callback
 
-helper.getCookie = (baseURL, options, callback) ->
+helper.getCookieJar = (baseURL, options, callback) ->
   CreateSession = require "#{ __dirname }/../endpoints/session/create"
   CreateSession baseURL, options, (err, httpResponse, body) ->
     return callback(err) if err
-    cookie = httpResponse.headers['set-cookie'].join(' ')
-    return callback { message: 'Cookie not found' } if not cookie
-    callback err, cookie
+    cookies = httpResponse.headers['set-cookie']
+    return callback { message: 'Cookies not found' } if not cookies
+    cookieJar = Request.jar()
+    cookies.forEach (cookie) ->
+      cookieJar.setCookie cookie, baseURL
+    callback err, cookieJar
 
 module.exports = helper
