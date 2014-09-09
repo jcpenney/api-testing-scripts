@@ -7,7 +7,7 @@ helper = {}
 helper.describeRequest = (message, requestOptions) ->
   requestOptions = _.cloneDeep requestOptions
   if requestOptions.jar
-    requestOptions.jar = 'cookie jar data surpressed for the sake of brevity'
+    requestOptions.jar = 'cookie jar data suppressed for the sake of brevity'
   console.log "\n#{ message }".cyan if message
   console.log "#{ FormatJSON.plain(requestOptions) }".yellow
 
