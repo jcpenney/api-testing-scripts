@@ -41,7 +41,7 @@ getAllDepartmentsWithCategories = (callback, maxLevel=99999) ->
         jsonCategory = JSON.parse(body)
 
         # Determine whether category is valid, based on its url property
-        o = "#{ totalCategoriesFetched }: #{ Array(currentLevel + 1).join('...') }#{ category.name } (#{ category.id }) ".white
+        o = "#{ category.name } (#{ category.id }) ".white
         if _.isEmpty category.url
           lameCategories.push category
           console.log o + "does not have a valid URL: #{ category.url }".red
@@ -55,7 +55,7 @@ getAllDepartmentsWithCategories = (callback, maxLevel=99999) ->
         return callback() if _.isEmpty category.categories
 
         # Iterate over sub-categories, fetch sub-sub-categories for each
-        Async.eachSeries category.categories, (category, callback) ->
+        Async.each category.categories, (category, callback) ->
           fetchCategory category, currentLevel + 1, (err) -> callback err
         , (err) ->
           # Finished fetching all sub-categories for category
@@ -71,7 +71,7 @@ getAllDepartmentsWithCategories = (callback, maxLevel=99999) ->
       departments = JSON.parse body
 
       # Iterate over departments, fetching categories for each
-      Async.eachSeries departments, (department, callback) ->
+      Async.each departments, (department, callback) ->
 
         fetchCategory department, 0, (err) ->
           # Finished fetching categories for department
