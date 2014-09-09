@@ -7,7 +7,6 @@ var Gulp = require('gulp');
 var Clean = require('gulp-clean');
 var Coffee = require('gulp-coffee');
 var FS = require('fs-extra');
-var Mkdirp = require('mkdirp');
 var Plumber = require('gulp-plumber');
 var Uglify = require('gulp-uglify');
 
