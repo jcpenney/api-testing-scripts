@@ -9,11 +9,13 @@ module.exports = (baseURL, options, callback) ->
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
     reqOpts =
-      headers: { 'Content-Type': 'application/json' }
       jar: cookieJar
-      method: 'DELETE'
-      uri: "#{ baseURL }/session"
+      json:
+        firstName: "Jay-C (#{ (new Date()).getTime() })"
+        lastName: "Penney (#{ (new Date()).getTime() })"
+      method: 'PUT'
+      uri: "#{ baseURL }/customer/name"
 
-    EndpointHelper.describeRequest "Signing out #{ options.credentials.email }...", reqOpts
+    EndpointHelper.describeRequest "Updating name for #{ options.credentials.email }...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

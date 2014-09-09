@@ -9,6 +9,6 @@ module.exports = (baseURL, options, callback) ->
     method: 'POST'
     uri: "#{ baseURL }/session"
     
-  EndpointHelper.describeRequest "Authenticating...", reqOpts
+  EndpointHelper.describeRequest "Signing in #{ options.credentials.email }...", reqOpts
 
   Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)
