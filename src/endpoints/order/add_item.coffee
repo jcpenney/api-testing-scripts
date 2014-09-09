@@ -8,6 +8,8 @@ module.exports = (baseURL, options, callback) ->
 
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
+    EndpointHelper.presentUnverifiedEndpointWarning()
+
     reqOpts =
       jar: cookieJar
       json:

@@ -45,4 +45,9 @@ helper.getAuthenticatedCookieJar = (baseURL, options, callback) ->
       cookieJar.setCookie cookie, baseURL
     callback err, cookieJar
 
+helper.presentUnverifiedEndpointWarning = ->
+  console.warn "\n********************************************************************".red
+  console.warn "WARNING: This endpoint test hasn't been verified to work yet.".red
+  console.warn "********************************************************************\n".red
+
 module.exports = helper
