@@ -1,9 +1,12 @@
+_ = require 'lodash'
 Request = require 'request'
-
 
 helper = {}
 
 helper.describeRequest = (message, requestOptions) ->
+  requestOptions = _.cloneDeep requestOptions
+  if requestOptions.jar
+    requestOptions.jar = '{ jar data surpressed for the sake of brevity }'
   console.log "\n#{ message }".cyan if message
   console.log "#{ JSON.stringify(requestOptions) }".yellow
 
