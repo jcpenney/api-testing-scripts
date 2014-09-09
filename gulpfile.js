@@ -37,7 +37,11 @@ Gulp.task('clean-build', function() {
 
 // Compile and uglify all coffeescript files
 Gulp.task('scripts', function() {
-  
+  return Gulp.src(paths.scripts.src)
+    .pipe(Plumber())
+    .pipe(Coffee())
+    // .pipe(Uglify({ mangle: false }))
+    .pipe(Gulp.dest(paths.scripts.dest));
 });
 
 // Rerun the task when a file changes
