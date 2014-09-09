@@ -34,7 +34,7 @@ helper.handleResponse = (err, httpResponse, body, callback) ->
   helper.describeResponse err, httpResponse, body
   callback err, httpResponse, body if callback
 
-helper.getCookieJar = (baseURL, options, callback) ->
+helper.getAuthenticatedCookieJar = (baseURL, options, callback) ->
   CreateSession = require "#{ __dirname }/../endpoints/session/create"
   CreateSession baseURL, options, (err, httpResponse, body) ->
     return callback(err) if err

@@ -35,9 +35,9 @@ paths.scripts = {
 
 // Clean the build directory
 gulp.task('clean-build', function() {
-  return gulp.src(paths.build.dir, { read: false })
+  return gulp.src(paths.build.dir)
     .pipe(plumber())
-    .pipe(clean());
+    .pipe(clean({ read: false }));
 });
 
 // Compile, uglify, and concatenate all coffeescript/javascript files
@@ -55,6 +55,6 @@ gulp.task('watch', function () {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['clean-build', 'build', 'watch']);
+gulp.task('default', ['build', 'watch']);
 gulp.task('clean', ['clean-build']);
 gulp.task('build', ['scripts'])

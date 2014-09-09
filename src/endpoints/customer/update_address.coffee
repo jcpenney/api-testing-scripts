@@ -4,7 +4,7 @@ Request = require 'request'
 
 module.exports = (baseURL, options, callback) ->
 
-  EndpointHelper.getCookieJar baseURL, options, (err, cookieJar) ->
+  EndpointHelper.getAuthenticatedCookieJar baseURL, options, (err, cookieJar) ->
 
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
