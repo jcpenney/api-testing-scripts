@@ -7,8 +7,9 @@ module.exports =
   test: (baseURL) ->
 
     searchTerm = 'shirts'
-    url = "#{ baseURL }/search/suggestions/#{ searchTerm }"
+    reqOpts = 
+      uri: "#{ baseURL }/search/suggestions/#{ searchTerm }"
 
-    console.log "\nFetching suggestions for #{ searchTerm } (#{ url })...".cyan
+    Reporter.describeRequest "Fetching suggestions for #{ searchTerm }", reqOpts
 
-    Request url, Reporter.describeResponse
+    Request reqOpts, Reporter.describeResponse

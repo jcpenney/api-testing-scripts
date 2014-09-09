@@ -1,5 +1,9 @@
 module.exports =
 
+  describeRequest: (message, requestOptions) ->
+    console.log "\n#{ message }".cyan if message
+    console.log "#{ JSON.stringify(requestOptions) }".yellow
+
   describeResponse: (err, httpResponse, body) ->
     if err
       console.error "\nRequest error.".red

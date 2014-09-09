@@ -8,9 +8,10 @@ module.exports =
   test: (baseURL) ->
 
     searchTerm = 'pants'
-    url = "#{ baseURL }/search"
-    qs = { q: searchTerm }
+    reqOpts =
+      uri: "#{ baseURL }/search"
+      qs: { q: searchTerm }
 
-    console.log "\nSearching for #{ searchTerm } (#{ url }?#{ QS.stringify(qs) })...".cyan
+    Reporter.describeRequest "Searching for #{ searchTerm }", reqOpts
 
-    Request { uri: url, qs: qs }, Reporter.describeResponse
+    Request reqOpts, Reporter.describeResponse

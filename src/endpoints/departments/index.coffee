@@ -6,8 +6,9 @@ module.exports =
 
   test: (baseURL) ->
 
-    url = "#{ baseURL }/departments"
+    reqOpts =
+      uri: "#{ baseURL }/departments"
 
-    console.log "\nFetching departments (#{ url })...".cyan
+    Reporter.describeRequest "Fetching departments", reqOpts
 
-    Request url, Reporter.describeResponse
+    Request reqOpts, Reporter.describeResponse

@@ -7,8 +7,9 @@ module.exports =
   test: (baseURL) ->
 
     productId = 'pp5004200088'
-    url = "#{ baseURL }/products/#{ productId }/reviews"
+    reqOpts =
+      uri: "#{ baseURL }/products/#{ productId }/reviews"
 
-    console.log "\nFetching product #{ productId } reviews (#{ url })...".cyan
+    Reporter.describeRequest "Fetching product #{ productId } reviews", reqOpts
 
-    Request url, Reporter.describeResponse
+    Request reqOpts, Reporter.describeResponse

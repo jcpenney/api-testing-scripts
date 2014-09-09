@@ -7,8 +7,9 @@ module.exports =
   test: (baseURL) ->
 
     categoryId = 'cat100210008'
-    url = "#{ baseURL }/categories/#{ categoryId }/products"
+    reqOpts =
+      uri: "#{ baseURL }/categories/#{ categoryId }/products"
 
-    console.log "\nFetching category #{ categoryId } products (#{ url })...".cyan
+    Reporter.describeRequest "Fetching category #{ categoryId } products", reqOpts
 
-    Request url, Reporter.describeResponse
+    Request reqOpts, Reporter.describeResponse
