@@ -7,7 +7,7 @@ module.exports =
   environments: [
     {
       name: 'Akamai'
-      baseURL: 'http://m-dt-test2.jcpenney.com/v2'
+      baseURL: 'http://m-dt-test1.jcpenney.com/v2'
     }
     , {
       name: 'Production'
