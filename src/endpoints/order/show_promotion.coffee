@@ -10,13 +10,12 @@ module.exports = (baseURL, options, callback) ->
 
     EndpointHelper.presentUnverifiedEndpointWarning()
 
-    itemId = 'xxx'
+    promotionId = 'xxx'
     reqOpts =
       headers: { 'Content-Type': 'application/json' }
       jar: cookieJar
-      method: 'DELETE'
-      uri: "#{ baseURL }/cart/items/#{ itemId }"
+      uri: "#{ baseURL }/cart/promotions/#{ promotionId }"
 
-    EndpointHelper.describeRequest "Deleting bag item #{ itemId }...", reqOpts
+    EndpointHelper.describeRequest "Fetching promotion #{ promotionId }...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)
