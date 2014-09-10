@@ -17,6 +17,6 @@ module.exports = (baseURL, options, callback) ->
       method: 'DELETE'
       uri: "#{ baseURL }/cart/items/#{ itemId }"
 
-    EndpointHelper.describeRequest "Removing bag item #{ itemId }...", reqOpts
+    EndpointHelper.describeRequest "Removing item #{ itemId } from #{ options.credentials.email }'s bag...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

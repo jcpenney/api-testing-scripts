@@ -10,12 +10,12 @@ module.exports = (baseURL, options, callback) ->
 
     EndpointHelper.presentUnverifiedEndpointWarning()
 
-    promotionId = 'xxx'
+    orderId = 'xxx'
     reqOpts =
       headers: { 'Content-Type': 'application/json' }
       jar: cookieJar
-      uri: "#{ baseURL }/cart/promotions/#{ promotionId }"
+      uri: "#{ baseURL }/orders/#{ orderId }"
 
-    EndpointHelper.describeRequest "Fetching promotion #{ promotionId }...", reqOpts
+    EndpointHelper.describeRequest "Fetching order #{ orderId }...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

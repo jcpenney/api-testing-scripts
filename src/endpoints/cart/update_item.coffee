@@ -18,6 +18,6 @@ module.exports = (baseURL, options, callback) ->
       method: 'PUT'
       uri: "#{ baseURL }/cart/items/#{ itemId }"
 
-    EndpointHelper.describeRequest "Updating bag item #{ itemId }...", reqOpts
+    EndpointHelper.describeRequest "Updating item #{ itemId } from #{ options.credentials.email }'s bag...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

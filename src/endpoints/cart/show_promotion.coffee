@@ -14,9 +14,8 @@ module.exports = (baseURL, options, callback) ->
     reqOpts =
       headers: { 'Content-Type': 'application/json' }
       jar: cookieJar
-      method: 'DELETE'
       uri: "#{ baseURL }/cart/promotions/#{ promotionId }"
 
-    EndpointHelper.describeRequest "Removing promotion #{ promotionId }...", reqOpts
+    EndpointHelper.describeRequest "Fetching promotion #{ promotionId } from #{ options.credentials.email }'s bag...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

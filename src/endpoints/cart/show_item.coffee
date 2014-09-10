@@ -16,6 +16,6 @@ module.exports = (baseURL, options, callback) ->
       jar: cookieJar
       uri: "#{ baseURL }/cart/items/#{ itemId }"
 
-    EndpointHelper.describeRequest "Fetching bag item #{ itemId }...", reqOpts
+    EndpointHelper.describeRequest "Fetching item #{ itemId } from #{ options.credentials.email }'s bag...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)
