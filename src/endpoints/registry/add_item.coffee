@@ -2,9 +2,9 @@ _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
-  EndpointHelper.getAuthenticatedCookieJar baseURL, options, (err, cookieJar) ->
+  EndpointHelper.getAuthenticatedCookieJar options, (err, cookieJar) ->
 
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
@@ -18,7 +18,7 @@ module.exports = (baseURL, options, callback) ->
         ppId: 'pp5002620229'
         quantity: 1
       method: 'POST'
-      uri: "#{ baseURL }/registry/items"
+      uri: "#{ options.environment.baseURL }/registry/items"
 
     EndpointHelper.describeRequest "Creating item for #{ options.credentials.email }'s registry...", reqOpts
 

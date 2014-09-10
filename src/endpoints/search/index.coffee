@@ -2,13 +2,13 @@ _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
   searchTerm = 'pants'
   reqOpts =
     headers: { 'Content-Type': 'application/json' }
     qs: { q: searchTerm }
-    uri: "#{ baseURL }/search"
+    uri: "#{ options.environment.baseURL }/search"
     
   EndpointHelper.describeRequest "Searching for #{ searchTerm }...", reqOpts
 

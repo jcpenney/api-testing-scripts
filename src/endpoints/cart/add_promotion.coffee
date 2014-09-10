@@ -2,9 +2,9 @@ _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
-  EndpointHelper.getAuthenticatedCookieJar baseURL, options, (err, cookieJar) ->
+  EndpointHelper.getAuthenticatedCookieJar options, (err, cookieJar) ->
 
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
@@ -16,7 +16,7 @@ module.exports = (baseURL, options, callback) ->
         type: 'COUPON'
         code: 'SHOPDEC'
       method: 'POST'
-      uri: "#{ baseURL }/cart/promotions"
+      uri: "#{ options.environment.baseURL }/cart/promotions"
 
     EndpointHelper.describeRequest "Adding promotion to #{ options.credentials.email }'s bag...", reqOpts
 

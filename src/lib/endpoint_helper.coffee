@@ -4,15 +4,15 @@ Request = require 'request'
 
 helper = {}
 
-helper.getAuthenticatedCookieJar = (baseURL, options, callback) ->
+helper.getAuthenticatedCookieJar = (options, callback) ->
   CreateSession = require "#{ __dirname }/../endpoints/session/create"
-  CreateSession baseURL, options, (err, httpResponse, body) ->
+  CreateSession options, (err, httpResponse, body) ->
     return callback(err) if err
     cookies = httpResponse.headers['set-cookie']
     return callback { message: 'Cookies not found' } if not cookies
     cookieJar = Request.jar()
     cookies.forEach (cookie) ->
-      cookieJar.setCookie cookie, baseURL
+      cookieJar.setCookie cookie, options.environment.baseURL
     callback err, cookieJar
 
 helper.handleResponse = (err, httpResponse, body, callback) ->

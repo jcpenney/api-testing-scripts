@@ -2,12 +2,12 @@ _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
   departmentId = 'dept20000013'
   reqOpts =
     headers: { 'Content-Type': 'application/json' }
-    uri: "#{ baseURL }/departments/#{ departmentId }"
+    uri: "#{ options.environment.baseURL }/departments/#{ departmentId }"
 
   EndpointHelper.describeRequest "Fetching department #{ departmentId }...", reqOpts
 

@@ -2,12 +2,12 @@ _ = require 'lodash'
 Request = require('request').defaults({ jar: true })
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
   reqOpts =
     json: options.credentials
     method: 'POST'
-    uri: "#{ baseURL }/session"
+    uri: "#{ options.environment.baseURL }/session"
     
   EndpointHelper.describeRequest "Signing in #{ options.credentials.email }...", reqOpts
 

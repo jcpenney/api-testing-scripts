@@ -2,9 +2,9 @@ _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
-  EndpointHelper.getAuthenticatedCookieJar baseURL, options, (err, cookieJar) ->
+  EndpointHelper.getAuthenticatedCookieJar options, (err, cookieJar) ->
 
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
@@ -14,7 +14,7 @@ module.exports = (baseURL, options, callback) ->
     reqOpts =
       headers: { 'Content-Type': 'application/json' }
       jar: cookieJar
-      uri: "#{ baseURL }/cart/promotions/#{ promotionId }"
+      uri: "#{ options.environment.baseURL }/cart/promotions/#{ promotionId }"
 
     EndpointHelper.describeRequest "Fetching promotion #{ promotionId } from #{ options.credentials.email }'s bag...", reqOpts
 

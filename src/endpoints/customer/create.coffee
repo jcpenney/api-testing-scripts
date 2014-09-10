@@ -2,7 +2,7 @@ _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
   EndpointHelper.presentWarning 'Note that account creation will fail if the email is already associated with another account.'
 
@@ -14,7 +14,7 @@ module.exports = (baseURL, options, callback) ->
       lastName: 'Penney'
       emailOptin: true
     method: 'POST'
-    uri: "#{ baseURL }/customer"
+    uri: "#{ options.environment.baseURL }/customer"
 
   EndpointHelper.describeRequest "Creating account...", reqOpts
 

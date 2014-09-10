@@ -2,9 +2,9 @@ _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
-  EndpointHelper.getAuthenticatedCookieJar baseURL, options, (err, cookieJar) ->
+  EndpointHelper.getAuthenticatedCookieJar options, (err, cookieJar) ->
 
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
@@ -16,7 +16,7 @@ module.exports = (baseURL, options, callback) ->
         type: 'EMAIL'
         value: options.credentials.email
       method: 'POST'
-      uri: "#{ baseURL }/optin"
+      uri: "#{ options.environment.baseURL }/optin"
 
     EndpointHelper.describeRequest "Opting in for email notifications to #{ options.credentials.email }...", reqOpts
 

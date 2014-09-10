@@ -2,9 +2,9 @@ _ = require 'lodash'
 EndpointHelper = require "#{ __dirname }/../../lib/endpoint_helper"
 Request = require 'request'
 
-module.exports = (baseURL, options, callback) ->
+module.exports = (options, callback) ->
 
-  EndpointHelper.getAuthenticatedCookieJar baseURL, options, (err, cookieJar) ->
+  EndpointHelper.getAuthenticatedCookieJar options, (err, cookieJar) ->
 
     return console.log "\nError authenticating.\n#{ JSON.stringify(err) }...".red if err
 
@@ -22,7 +22,7 @@ module.exports = (baseURL, options, callback) ->
         country: 'US'
         phone: '8003221189'
       method: 'PUT'
-      uri: "#{ baseURL }/customer/addresses/#{ addressId }"
+      uri: "#{ options.environment.baseURL }/customer/addresses/#{ addressId }"
 
     EndpointHelper.describeRequest "Updating address #{ addressId } for customer #{ options.credentials.email }...", reqOpts
 
