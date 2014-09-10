@@ -13,6 +13,6 @@ module.exports = (baseURL, options, callback) ->
       jar: cookieJar
       uri: "#{ baseURL }/customer/addresses"
 
-    EndpointHelper.describeRequest "Fetching customer #{ options.credentials.email }'s addresses", reqOpts
+    EndpointHelper.describeRequest "Fetching customer #{ options.credentials.email }'s addresses...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

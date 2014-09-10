@@ -23,6 +23,6 @@ module.exports = (baseURL, options, callback) ->
       method: 'POST'
       uri: "#{ baseURL }/cart/items"
 
-    EndpointHelper.describeRequest "Adding item to #{ options.credentials.email }'s bag", reqOpts
+    EndpointHelper.describeRequest "Adding item to #{ options.credentials.email }'s bag...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

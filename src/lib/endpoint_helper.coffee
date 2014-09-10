@@ -4,6 +4,21 @@ Request = require 'request'
 
 helper = {}
 
+helper.getAuthenticatedCookieJar = (baseURL, options, callback) ->
+  CreateSession = require "#{ __dirname }/../endpoints/session/create"
+  CreateSession baseURL, options, (err, httpResponse, body) ->
+    return callback(err) if err
+    cookies = httpResponse.headers['set-cookie']
+    return callback { message: 'Cookies not found' } if not cookies
+    cookieJar = Request.jar()
+    cookies.forEach (cookie) ->
+      cookieJar.setCookie cookie, baseURL
+    callback err, cookieJar
+
+helper.handleResponse = (err, httpResponse, body, callback) ->
+  helper.describeResponse err, httpResponse, body
+  callback err, httpResponse, body if callback
+
 helper.describeRequest = (message, requestOptions) ->
   requestOptions = _.cloneDeep requestOptions
   if requestOptions.jar
@@ -30,24 +45,14 @@ helper.describeResponse = (err, httpResponse, body) ->
     console.log "\nStatus Code: #{ httpResponse.statusCode }".green
     console.log "\n#{ if body then body.green else 'No body.'.green }\n"
 
-helper.handleResponse = (err, httpResponse, body, callback) ->
-  helper.describeResponse err, httpResponse, body
-  callback err, httpResponse, body if callback
-
-helper.getAuthenticatedCookieJar = (baseURL, options, callback) ->
-  CreateSession = require "#{ __dirname }/../endpoints/session/create"
-  CreateSession baseURL, options, (err, httpResponse, body) ->
-    return callback(err) if err
-    cookies = httpResponse.headers['set-cookie']
-    return callback { message: 'Cookies not found' } if not cookies
-    cookieJar = Request.jar()
-    cookies.forEach (cookie) ->
-      cookieJar.setCookie cookie, baseURL
-    callback err, cookieJar
+helper.presentWarning = (message) ->
+  console.warn "\n***********************************************************************************************".red
+  console.warn message.red
+  console.warn "***********************************************************************************************\n".red
 
 helper.presentUnverifiedEndpointWarning = ->
-  console.warn "\n********************************************************************".red
+  console.warn "\n***********************************************************************************************".red
   console.warn "WARNING: This endpoint test hasn't been verified to work yet.".red
-  console.warn "********************************************************************\n".red
+  console.warn "***********************************************************************************************\n".red
 
 module.exports = helper

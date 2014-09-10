@@ -18,6 +18,6 @@ module.exports = (baseURL, options, callback) ->
       method: 'POST'
       uri: "#{ baseURL }/optin"
 
-    EndpointHelper.describeRequest "Opting in for email notifications to #{ options.credentials.email }", reqOpts
+    EndpointHelper.describeRequest "Opting in for email notifications to #{ options.credentials.email }...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)

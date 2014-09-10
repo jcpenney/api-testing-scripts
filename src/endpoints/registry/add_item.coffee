@@ -20,6 +20,6 @@ module.exports = (baseURL, options, callback) ->
       method: 'POST'
       uri: "#{ baseURL }/registry/items"
 
-    EndpointHelper.describeRequest "Creating item for #{ options.credentials.email }'s registry", reqOpts
+    EndpointHelper.describeRequest "Creating item for #{ options.credentials.email }'s registry...", reqOpts
 
     Request reqOpts, _.partialRight(EndpointHelper.handleResponse, callback)
